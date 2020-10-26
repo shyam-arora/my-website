@@ -4,14 +4,14 @@ module.exports = {
   url: "https://your-docusaurus-test-site.com",
   baseUrl: "/",
   onBrokenLinks: "throw",
-  favicon: "img/favicon.ico",
+  favicon: "img/logo.svg",
   organizationName: "facebook", // Usually your GitHub org/user name.
   projectName: "docusaurus", // Usually your repo name.
   themeConfig: {
     navbar: {
-      title: "My Site",
+      title: "iCalm.dev",
       logo: {
-        alt: "My Site Logo",
+        alt: "iCalmDev",
         src: "img/logo.svg",
       },
       items: [
@@ -72,7 +72,7 @@ module.exports = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+      copyright: `Built with Docusaurus.`,
     },
   },
   presets: [

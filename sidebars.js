@@ -13,7 +13,7 @@ module.exports = {
     {
       type: "category",
       label: "Javascript",
-      items: ["javascript/mdx"],
+      items: ["javascript/cheatsheet"],
     },
     {
       type: "category",
@@ -28,7 +28,7 @@ module.exports = {
     {
       type: "category",
       label: "React JS",
-      items: ["reactjs/mdx"],
+      items: ["reactjs/cheatsheet"],
     },
     {
       type: "category",
