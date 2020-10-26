@@ -1,7 +1,7 @@
 module.exports = {
-  title: "My Site",
+  title: "iCalm.dev",
   tagline: "The tagline of my site",
-  url: "https://your-docusaurus-test-site.com",
+  url: "https://icalm.dev/",
   baseUrl: "/",
   onBrokenLinks: "throw",
   favicon: "img/logo.svg",
