@@ -8,22 +8,21 @@ module.exports = {
     {
       type: "category",
       label: "HTML/CSS",
-      items: ["html/mdx"],
+      items: ["html/brief"],
     },
     {
       type: "category",
       label: "Javascript",
-      items: ["javascript/cheatsheet"],
-    },
-    {
-      type: "category",
-      label: "Javascript Polyfills",
-      items: ["javascript-polyfills/mdx"],
+      items: [
+        "javascript/cheatsheet",
+        "javascript/dom",
+        "javascript/polyfills",
+      ],
     },
     {
       type: "category",
       label: "Leetcode",
-      items: ["leetcode/mdx"],
+      items: ["leetcode/easy-set-1"],
     },
     {
       type: "category",
@@ -33,12 +32,17 @@ module.exports = {
     {
       type: "category",
       label: "System Design",
-      items: ["system-design/mdx"],
+      items: ["system-design/token-based-auth"],
+    },
+    {
+      type: "category",
+      label: "Typescript",
+      items: ["typescript/cheatsheet"],
     },
     {
       type: "category",
       label: "Web Peformance",
-      items: ["web-performance/mdx"],
+      items: ["web-performance/basic"],
     },
   ],
 };

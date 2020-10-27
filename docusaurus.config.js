@@ -67,12 +67,12 @@ module.exports = {
             },
             {
               label: "GitHub",
-              href: "https://github.com/facebook/docusaurus",
+              href: "https://github.com/shyam-arora/my-website",
             },
           ],
         },
       ],
-      copyright: `Built with Docusaurus.`,
+      copyright: `Maintained by Shyam Arora, Built with Docusaurus`,
     },
   },
   presets: [
