@@ -21,8 +21,13 @@ module.exports = {
     },
     {
       type: "category",
-      label: "Leetcode",
-      items: ["leetcode/easy-set-1"],
+      label: "Coding Questions",
+      items: ["coding-questions/easy-set-1"],
+    },
+    {
+      type: "category",
+      label: "Linux",
+      items: ["linux/frequently-used"],
     },
     {
       type: "category",
@@ -38,6 +43,11 @@ module.exports = {
       type: "category",
       label: "Typescript",
       items: ["typescript/cheatsheet"],
+    },
+    {
+      type: "category",
+      label: "VSCode",
+      items: ["vscode/frequently-used"],
     },
     {
       type: "category",
