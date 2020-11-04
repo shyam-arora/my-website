@@ -11,10 +11,10 @@ https://code.visualstudio.com/docs/getstarted/keybindings#_when-clause-contexts
 
 https://github.com/microsoft/vscode-codicons/tree/master/src/icons
 
-### Icon list
-
-https://github.com/microsoft/vscode-codicons/tree/master/src/icons
-
 ### Dignostic (Warning/Error line)
 
 https://github.com/microsoft/vscode-extension-samples/tree/master/diagnostic-related-information-sample
+
+### VSCode UI
+
+https://code.visualstudio.com/docs/getstarted/userinterface
