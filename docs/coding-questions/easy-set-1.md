@@ -225,3 +225,59 @@ var mergeTwoLists = function (l1, l2) {
 **Reference**
 
 1. Merge Two Sorted Lists (https://leetcode.com/problems/merge-two-sorted-lists/)
+
+## Valid Parentheses [(Leetcode)](https://leetcode.com/problems/valid-parentheses/)
+
+Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+
+An input string is valid if:
+
+1. Open brackets must be closed by the same type of brackets.
+2. Open brackets must be closed in the correct order.
+
+**Example 1**
+
+```
+Input: s = "()[]{}"
+Output: true
+```
+
+**Example 2**
+
+```
+Input: s = "([)]"
+Output: false
+```
+
+```javascript
+/**
+ * @param {string} s
+ * @return {boolean}
+ */
+var isValid = function (s) {
+  const map = new Map([
+    [")", "("],
+    ["]", "["],
+    ["}", "{"],
+  ]);
+  const sLen = s.length;
+  const stack = [];
+  for (let i = 0; i < sLen; i++) {
+    if (map.has(s[i])) {
+      const temp = map.get(s[i]);
+      if (stack[stack.length - 1] === temp) {
+        stack.pop();
+      } else {
+        return false;
+      }
+    } else {
+      stack.push(s[i]);
+    }
+  }
+  return !stack.length;
+};
+```
+
+**Reference**
+
+1. Valid Parentheses (https://leetcode.com/problems/valid-parentheses/)
