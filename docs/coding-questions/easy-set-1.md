@@ -281,3 +281,127 @@ var isValid = function (s) {
 **Reference**
 
 1. Valid Parentheses (https://leetcode.com/problems/valid-parentheses/)
+
+## Best Time to Buy and Sell Stock [(Leetcode)](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/)
+
+Say you have an array for which the ith element is the price of a given stock on day i.
+
+If you were only permitted to complete at most one transaction (i.e., buy one and sell one share of the stock), design an algorithm to find the maximum profit.
+
+Note that you cannot sell a stock before you buy one.
+
+**Example 1**
+
+```
+Input: [7,1,5,3,6,4]
+Output: 5
+Explanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.
+             Not 7-1 = 6, as selling price needs to be larger than buying price.
+```
+
+```javascript
+/**
+ * @param {number[]} prices
+ * @return {number}
+ */
+var maxProfit = function (prices) {
+  const pricesLen = prices.length;
+  let maxProfit = 0;
+  if (pricesLen === 0 || pricesLen === 1) {
+    return maxProfit;
+  }
+  let minBuy = prices[0];
+  for (let i = 0; i < pricesLen; i++) {
+    maxProfit = Math.max(maxProfit, prices[i] - minBuy);
+    minBuy = Math.min(minBuy, prices[i]);
+  }
+  return maxProfit;
+};
+```
+
+**Reference**
+
+1. Best Time to Buy and Sell Stock (https://leetcode.com/problems/best-time-to-buy-and-sell-stock/)
+
+## Verifying an Alien Dictionary [(Leetcode)](https://leetcode.com/problems/verifying-an-alien-dictionary/)
+
+In an alien language, surprisingly they also use english lowercase letters, but possibly in a different order. The order of the alphabet is some permutation of lowercase letters.
+
+Given a sequence of words written in the alien language, and the order of the alphabet, return true if and only if the given words are sorted lexicographicaly in this alien language.
+
+**Example 1**
+
+```
+Input: words = ["word","world","row"], order = "worldabcefghijkmnpqstuvxyz"
+Output: false
+Explanation: As 'd' comes after 'l' in this language, then words[0] > words[1], hence the sequence is unsorted.
+```
+
+### With sort
+
+```javascript
+/**
+ * @param {string[]} words
+ * @param {string} order
+ * @return {boolean}
+ */
+var isAlienSorted = function (words, order) {
+  const map = new Map();
+  const copy = [...words];
+  for (let i = 0; i < order.length; i++) {
+    map.set(order[i], i);
+  }
+  const comparator = (a, b) => {
+    const maxLen = Math.max(a.length, b.length);
+    for (let i = 0; i < maxLen; i++) {
+      if (!a[i] && b[i]) return -1;
+      if (!b[i] && a[i]) return 1;
+      if (map.get(a[i]) < map.get(b[i])) return -1;
+      if (map.get(a[i]) > map.get(b[i])) return 1;
+    }
+    return 0;
+  };
+  copy.sort(comparator);
+  return words.every((item, i) => item === copy[i]);
+};
+```
+
+### Without sort
+
+```javascript
+/**
+ * @param {string[]} words
+ * @param {string} order
+ * @return {boolean}
+ */
+var isAlienSorted = function (words, order) {
+  const map = new Map();
+
+  for (let i = 0; i < order.length; i++) {
+    map.set(order[i], i);
+  }
+  const comparator = (a, b) => {
+    const maxLen = Math.max(a.length, b.length);
+    for (let i = 0; i < maxLen; i++) {
+      if (!a[i] && b[i]) return -1;
+      if (!b[i] && a[i]) return 1;
+      if (map.get(a[i]) < map.get(b[i])) return -1;
+      if (map.get(a[i]) > map.get(b[i])) return 1;
+    }
+    return 0;
+  };
+
+  for (let i = 1; i < words.length; i++) {
+    const result = comparator(words[i - 1], words[i]);
+    if (result === 1) {
+      return false;
+    }
+  }
+
+  return true;
+};
+```
+
+**Reference**
+
+1. Verifying an Alien Dictionary (https://leetcode.com/problems/verifying-an-alien-dictionary/)
