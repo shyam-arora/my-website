@@ -405,3 +405,148 @@ var isAlienSorted = function (words, order) {
 **Reference**
 
 1. Verifying an Alien Dictionary (https://leetcode.com/problems/verifying-an-alien-dictionary/)
+
+## Reverse Linked List [(Leetcode)](https://leetcode.com/problems/reverse-linked-list/)
+
+Reverse a singly linked list.
+
+**Example 1**
+
+```
+Input: 1->2->3->4->5->NULL
+Output: 5->4->3->2->1->NULL
+```
+
+### Iterative
+
+```javascript
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+var reverseList = function (head) {
+  let current = head;
+  let prev = null;
+  while (current) {
+    const next = current.next;
+    current.next = prev;
+    prev = current;
+    current = next;
+  }
+  return prev;
+};
+```
+
+**Reference**
+
+1. Reverse Linked List (https://leetcode.com/problems/reverse-linked-list/)
+
+## Add Strings [(Leetcode)](https://leetcode.com/problems/add-strings/)
+
+Given two non-negative integers num1 and num2 represented as string, return the sum of num1 and num2.
+
+Note:
+
+The length of both num1 and num2 is < 5100.
+Both num1 and num2 contains only digits 0-9.
+Both num1 and num2 does not contain any leading zero.
+You must not use any built-in BigInteger library or convert the inputs to integer directly.
+
+```javascript
+/**
+ * @param {string} num1
+ * @param {string} num2
+ * @return {string}
+ */
+var addStrings = function (num1, num2) {
+  if (num1.length > num2.length) {
+    const diff = num1.length - num2.length;
+    for (let i = 0; i < diff; i++) {
+      num2 = "0" + num2;
+    }
+  } else if (num1.length < num2.length) {
+    const diff = num2.length - num1.length;
+    for (let i = 0; i < diff; i++) {
+      num1 = "0" + num1;
+    }
+  }
+  let ptr = num1.length;
+  let result = "";
+  let carry = 0;
+  while (ptr) {
+    let i = ptr - 1;
+    const sum = num1.charCodeAt(i) - 48 + num2.charCodeAt(i) - 48 + carry;
+    result = `${sum % 10}${result}`;
+    if (sum > 9) {
+      carry = 1;
+    } else {
+      carry = 0;
+    }
+    ptr--;
+  }
+  if (carry) {
+    result = `1${result}`;
+  }
+  return result;
+};
+```
+
+**Reference**
+
+1. Add Strings (https://leetcode.com/problems/add-strings/)
+
+## Reverse Integer [(Leetcode)](https://leetcode.com/problems/reverse-integer/)
+
+Given a 32-bit signed integer, reverse digits of an integer.
+
+Note:
+Assume we are dealing with an environment that could only store integers within the 32-bit signed integer range: [−2<sup>31</sup>, 2<sup>31</sup> − 1]. For the purpose of this problem, assume that your function returns 0 when the reversed integer overflows.
+
+**Example: 1**
+
+```
+Input: x = 123
+Output: 321
+```
+
+```javascript
+/**
+ * @param {number} x
+ * @return {number}
+ */
+var reverse = function (x) {
+  const CONSTRAINT = Math.pow(2, 31);
+
+  let num = x;
+  let mux = 1;
+  num = Math.trunc(num / 10);
+  while (num) {
+    mux = mux * 10;
+    num = Math.trunc(num / 10);
+  }
+  num = x;
+  let result = 0;
+  while (num) {
+    result = result + mux * (num % 10);
+    mux = mux / 10;
+    num = Math.trunc(num / 10);
+  }
+  if (result < CONSTRAINT - 1 && result > -1 * CONSTRAINT) {
+    return result;
+  } else {
+    return 0;
+  }
+};
+```
+
+**Reference**
+
+1. Reverse Integer (https://leetcode.com/problems/reverse-integer/)
+2. Math.trunc (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/trunc)
