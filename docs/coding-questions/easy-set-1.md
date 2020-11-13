@@ -550,3 +550,51 @@ var reverse = function (x) {
 
 1. Reverse Integer (https://leetcode.com/problems/reverse-integer/)
 2. Math.trunc (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/trunc)
+
+## Merge Sorted Array [(Leetcode)](https://leetcode.com/problems/merge-sorted-array/)
+
+Given two sorted integer arrays nums1 and nums2, merge nums2 into nums1 as one sorted array.
+
+Note:
+
+The number of elements initialized in nums1 and nums2 are m and n respectively.
+You may assume that nums1 has enough space (size that is equal to m + n) to hold additional elements from nums2.
+
+**Example: 1**
+
+```
+Input:
+nums1 = [1,2,3,0,0,0], m = 3
+nums2 = [2,5,6],       n = 3
+
+Output: [1,2,2,3,5,6]
+```
+
+```javascript
+/**
+ * @param {number[]} nums1
+ * @param {number} m
+ * @param {number[]} nums2
+ * @param {number} n
+ * @return {void} Do not return anything, modify nums1 in-place instead.
+ */
+var merge = function (nums1, m, nums2, n) {
+  let ptr1 = m - 1;
+  let ptr2 = n - 1;
+  let endPtr = m + n - 1;
+  while (ptr2 !== -1) {
+    if (nums1[ptr1] > nums2[ptr2]) {
+      nums1[endPtr] = nums1[ptr1];
+      ptr1--;
+    } else {
+      nums1[endPtr] = nums2[ptr2];
+      ptr2--;
+    }
+    endPtr--;
+  }
+};
+```
+
+**Reference**
+
+1. Merge Sorted Array (https://leetcode.com/problems/merge-sorted-array/)
