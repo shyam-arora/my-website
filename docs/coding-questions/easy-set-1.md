@@ -654,3 +654,123 @@ var isPalindrome = function (head) {
 **Reference**
 
 1. Palindrome Linked List (https://leetcode.com/problems/palindrome-linked-list/)
+
+## Min Stack [(Leetcode)](https://leetcode.com/problems/min-stack/)
+
+Design a stack that supports push, pop, top, and retrieving the minimum element in constant time.
+
+push(x) -- Push element x onto stack.
+pop() -- Removes the element on top of the stack.
+top() -- Get the top element.
+getMin() -- Retrieve the minimum element in the stack.
+
+**Example: 1**
+
+```
+Input
+["MinStack","push","push","push","getMin","pop","top","getMin"]
+[[],[-2],[0],[-3],[],[],[],[]]
+
+Output
+[null,null,null,null,-3,null,0,-2]
+
+Explanation
+MinStack minStack = new MinStack();
+minStack.push(-2);
+minStack.push(0);
+minStack.push(-3);
+minStack.getMin(); // return -3
+minStack.pop();
+minStack.top();    // return 0
+minStack.getMin(); // return -2
+```
+
+```javascript
+/**
+ * initialize your data structure here.
+ */
+var MinStack = function () {
+  this.minStack = [Number.MAX_SAFE_INTEGER];
+  this.stack = [];
+};
+
+/**
+ * @param {number} x
+ * @return {void}
+ */
+MinStack.prototype.push = function (x) {
+  this.stack.push(x);
+  if (x <= this.minStack[this.minStack.length - 1]) {
+    this.minStack.push(x);
+  }
+};
+
+/**
+ * @return {void}
+ */
+MinStack.prototype.pop = function () {
+  const popedValue = this.stack.pop();
+  if (this.minStack[this.minStack.length - 1] === popedValue) {
+    this.minStack.pop();
+  }
+};
+
+/**
+ * @return {number}
+ */
+MinStack.prototype.top = function () {
+  return this.stack[this.stack.length - 1];
+};
+
+/**
+ * @return {number}
+ */
+MinStack.prototype.getMin = function () {
+  return this.minStack[this.minStack.length - 1];
+};
+
+/**
+ * Your MinStack object will be instantiated and called as such:
+ * var obj = new MinStack()
+ * obj.push(x)
+ * obj.pop()
+ * var param_3 = obj.top()
+ * var param_4 = obj.getMin()
+ */
+```
+
+**Reference**
+
+1.  Min Stack (https://leetcode.com/problems/min-stack/)
+
+## Second Highest Salary [(Leetcode)](https://leetcode.com/problems/second-highest-salary/)
+
+Write a SQL query to get the second highest salary from the Employee table.
+
+```
++----+--------+
+| Id | Salary |
++----+--------+
+| 1 | 100 |
+| 2 | 200 |
+| 3 | 300 |
++----+--------+
+```
+
+For example, given the above Employee table, the query should return 200 as the second highest salary. If there is no second highest salary, then the query should return null.
+
+```
++---------------------+
+| SecondHighestSalary |
++---------------------+
+| 200 |
++---------------------+
+```
+
+```sql
+SELECT (SELECT DISTINCT Salary FROM Employee ORDER BY Salary DESC LIMIT 1 OFFSET 1) AS SecondHighestSalary
+```
+
+**Reference**
+
+1.  Second Highest Salary (https://leetcode.com/problems/second-highest-salary/)
