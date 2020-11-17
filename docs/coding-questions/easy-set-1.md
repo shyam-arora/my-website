@@ -598,3 +598,59 @@ var merge = function (nums1, m, nums2, n) {
 **Reference**
 
 1. Merge Sorted Array (https://leetcode.com/problems/merge-sorted-array/)
+
+## Palindrome Linked List [(Leetcode)](https://leetcode.com/problems/palindrome-linked-list/)
+
+Given a singly linked list, determine if it is a palindrome.
+
+**Example: 1**
+
+```
+Input: 1->2->2->1
+Output: true
+```
+
+```javascript
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {boolean}
+ */
+var isPalindrome = function (head) {
+  let slow = head;
+  let fast = head;
+  while (fast && fast.next) {
+    slow = slow.next;
+    fast = fast.next.next;
+  }
+  let current = slow;
+  let prev = null;
+  while (current) {
+    const next = current.next;
+    current.next = prev;
+    prev = current;
+    current = next;
+  }
+  let h1 = head;
+  let h2 = prev;
+  while (h1 && h2) {
+    if (h1.val === h2.val) {
+      h1 = h1.next;
+      h2 = h2.next;
+    } else {
+      return false;
+    }
+  }
+  return true;
+};
+```
+
+**Reference**
+
+1. Palindrome Linked List (https://leetcode.com/problems/palindrome-linked-list/)
