@@ -774,3 +774,163 @@ SELECT (SELECT DISTINCT Salary FROM Employee ORDER BY Salary DESC LIMIT 1 OFFSET
 **Reference**
 
 1.  Second Highest Salary (https://leetcode.com/problems/second-highest-salary/)
+
+## Move Zeroes [(Leetcode)](https://leetcode.com/problems/move-zeroes/)
+
+Given an array nums, write a function to move all 0's to the end of it while maintaining the relative order of the non-zero elements.
+
+**Example:**
+
+```
+Input: [0,1,0,3,12]
+Output: [1,3,12,0,0]
+Note:
+```
+
+You must do this in-place without making a copy of the array.
+Minimize the total number of operations.
+
+```javascript
+/**
+ * @param {number[]} nums
+ * @return {void} Do not return anything, modify nums in-place instead.
+ */
+var moveZeroes = function (nums) {
+  let thres = nums.indexOf(0);
+  for (let i = 0; i < nums.length; i++) {
+    const item = nums[i];
+    if (item != 0) {
+      const nextZeroIndex = nums.indexOf(0, thres);
+      if (nextZeroIndex == -1) return;
+      if (nextZeroIndex <= i) {
+        nums[nextZeroIndex] = item;
+        nums[i] = 0;
+        thres = nextZeroIndex + 1;
+      }
+    }
+  }
+};
+```
+
+**Reference**
+
+1.  Move Zeroes (https://leetcode.com/problems/move-zeroes/)
+
+## Valid Palindrome II [(Leetcode)](https://leetcode.com/problems/valid-palindrome-ii/)
+
+Given an array nums, write a function to move all 0's to the end of it while maintaining the relative order of the non-zero elements.
+
+**Example:**
+
+Given a non-empty string s, you may delete at most one character. Judge whether you can make it a palindrome.
+
+Example 1:
+
+```
+Input: "aba"
+Output: True
+```
+
+Example 2:
+
+```
+Input: "abca"
+Output: True
+Explanation: You could delete the character 'c'.
+```
+
+Note:
+The string will only contain lowercase characters a-z. The maximum length of the string is 50000.
+
+```javascript
+/**
+ * @param {string} s
+ * @return {boolean}
+ */
+var validPalindrome = function (s) {
+  const isPalindrome = (str) => {
+    const strLen = str.length;
+    const mid = Math.trunc(strLen / 2);
+    for (let i = 0; i < mid; i++) {
+      if (str.charAt(i) != str.charAt(strLen - i - 1)) {
+        return i;
+      }
+    }
+    return true;
+  };
+
+  const try1 = isPalindrome(s);
+  if (try1 === true) return true;
+
+  const try2 = isPalindrome(s.slice(try1 + 1, s.length - try1));
+  if (try2 === true) return true;
+
+  const try3 = isPalindrome(s.slice(try1, s.length - try1 - 1));
+  if (try3 === true) return true;
+
+  return false;
+};
+```
+
+**Reference**
+
+1.  Valid Palindrome II (https://leetcode.com/problems/valid-palindrome-ii/)
+
+## Add Binary [(Leetcode)](https://leetcode.com/problems/add-binary/)
+
+**Example 1**:
+
+```
+Input: a = "11", b = "1"
+Output: "100"
+```
+
+**Example 2**:
+
+```
+Input: a = "1010", b = "1011"
+Output: "10101"
+```
+
+```javascript
+/**
+ * @param {string} a
+ * @param {string} b
+ * @return {string}
+ */
+var addBinary = function (a, b) {
+  let result = "";
+  let maxLen = Math.max(a.length, b.length);
+  if (a.length < maxLen) {
+    a = a.padStart(maxLen, "0");
+  } else if (b.length < maxLen) {
+    b = b.padStart(maxLen, "0");
+  }
+  let endPtr = maxLen - 1;
+  let carry = 0;
+  while (endPtr != -1) {
+    const v1 = a.charAt(endPtr) ? a.charCodeAt(endPtr) - 48 : 0;
+    const v2 = b.charAt(endPtr) ? b.charCodeAt(endPtr) - 48 : 0;
+    const sum = v1 + v2 + carry;
+    if (sum === 0 || sum === 1) {
+      carry = 0;
+      result = `${sum}${result}`;
+    } else if (sum === 2) {
+      carry = 1;
+      result = `0${result}`;
+    } else if (sum === 3) {
+      carry = 1;
+      result = `1${result}`;
+    }
+    endPtr--;
+  }
+  if (carry) {
+    result = `1${result}`;
+  }
+  return result;
+};
+```
+
+**Reference**
+
+1.  Add Binary (https://leetcode.com/problems/add-binary/)
