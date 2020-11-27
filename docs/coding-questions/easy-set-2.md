@@ -97,3 +97,135 @@ var minMoves = function (nums) {
 **Reference**
 
 1. Minimum Moves to Equal Array Elements (https://leetcode.com/problems/minimum-moves-to-equal-array-elements/)
+
+## First Unique Character in a String Elements [(Leetcode)](https://leetcode.com/problems/first-unique-character-in-a-string/)
+
+Given a string, find the first non-repeating character in it and return its index. If it doesn't exist, return -1.
+
+**Example 1:**
+
+```
+s = "leetcode"
+return 0.
+
+s = "loveleetcode"
+return 2.
+```
+
+```javascript
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var firstUniqChar = function (s) {
+  const occArray = [];
+  const sLen = s.length;
+  for (let i = 0; i < sLen; i++) {
+    const idx = s.charCodeAt(i) - 48;
+    occArray[idx] = (occArray[idx] || 0) + 1;
+  }
+  for (let i = 0; i < sLen; i++) {
+    if (occArray[s.charCodeAt(i) - 48] === 1) {
+      return i;
+    }
+  }
+  return -1;
+};
+```
+
+**Reference**
+
+1. First Unique Character in a String (https://leetcode.com/problems/first-unique-character-in-a-string/)
+
+## House Robber [(Leetcode)](https://leetcode.com/problems/house-robber/)
+
+You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is that adjacent houses have security system connected and it will automatically contact the police if two adjacent houses were broken into on the same night.
+
+Given a list of non-negative integers representing the amount of money of each house, determine the maximum amount of money you can rob tonight without alerting the police.
+
+**Example 1:**
+
+```
+Input: nums = [1,2,3,1]
+Output: 4
+Explanation: Rob house 1 (money = 1) and then rob house 3 (money = 3).
+Total amount you can rob = 1 + 3 = 4.
+```
+
+**Example 2:**
+
+```
+Input: nums = [2,7,9,3,1]
+Output: 12
+Explanation: Rob house 1 (money = 2), rob house 3 (money = 9) and rob house 5 (money = 1).
+Total amount you can rob = 2 + 9 + 1 = 12.
+```
+
+### Brute force
+
+```javascript
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var rob = function (nums) {
+  let max = 0;
+  if (!nums.length) return 0;
+  if (nums.length <= 2) return Math.max(...nums);
+
+  const helper = (sum, i) => {
+    if (!nums[i]) return;
+    const tSum = sum + nums[i];
+    max = Math.max(max, tSum);
+    helper(tSum, i + 2);
+    helper(tSum, i + 3);
+  };
+  helper(0, 0);
+  helper(0, 1);
+  return max;
+};
+```
+
+### DP
+
+```javascript
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var rob = function (nums) {
+  if (!nums.length) return 0;
+  if (nums.length <= 2) return Math.max(...nums);
+  let dp = [nums[0], Math.max(nums[0], nums[1])];
+  for (let i = 2; i < nums.length; i++) {
+    dp[i] = Math.max(dp[i - 1], nums[i] + dp[i - 2]);
+  }
+  return dp[dp.length - 1];
+};
+```
+
+### DP (optimized)
+
+```javascript
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var rob = function (nums) {
+  let max = 0;
+  if (!nums.length) return 0;
+  if (nums.length <= 2) return Math.max(...nums);
+  let prev = nums[0];
+  let current = Math.max(prev, nums[1]);
+  for (let i = 2; i < nums.length; i++) {
+    const temp = Math.max(current, nums[i] + prev);
+    prev = current;
+    current = temp;
+  }
+  return current;
+};
+```
+
+**Reference**
+
+1. House Robber (https://leetcode.com/problems/house-robber/)
