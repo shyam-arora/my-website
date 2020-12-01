@@ -386,3 +386,62 @@ var hasPathSum = function (root, sum) {
 **Reference**
 
 1. Path Sum (https://leetcode.com/problems/path-sum/)
+
+## Invert Binary Tree [(Leetcode)](https://leetcode.com/problems/invert-binary-tree/)
+
+Invert a binary tree.
+
+**Example 1:**
+
+Input
+
+```
+     4
+   /   \
+  2     7
+ / \   / \
+1   3 6   9
+
+```
+
+Output
+
+```
+     4
+   /   \
+  7     2
+ / \   / \
+9   6 3   1
+
+```
+
+```javascript
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {TreeNode}
+ */
+var invertTree = function (root) {
+  const helper = (node) => {
+    if (!node) return;
+    const temp = node.left;
+    node.left = node.right;
+    node.right = temp;
+    helper(node.left);
+    helper(node.right);
+  };
+  helper(root);
+  return root;
+};
+```
+
+**Reference**
+
+1. Invert Binary Tree (https://leetcode.com/problems/invert-binary-tree/)
