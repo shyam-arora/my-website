@@ -747,3 +747,63 @@ var isSubtree = function (s, t) {
 **Reference**
 
 1. Subtree of Another Tree (https://leetcode.com/problems/subtree-of-another-tree/)
+
+## Valid Anagram [(Leetcode)](https://leetcode.com/problems/valid-anagram/)
+
+Given two strings s and t , write a function to determine if t is an anagram of s.
+
+**Example 1:**
+
+Input: s = "anagram", t = "nagaram"
+Output: true
+
+**Example 2:**
+
+Input: s = "rat", t = "car"
+Output: false
+
+Note:
+You may assume the string contains only lowercase alphabets.
+
+Follow up:
+What if the inputs contain unicode characters? How would you adapt your solution to such case?
+
+```javascript
+/**
+ * @param {string} s
+ * @param {string} t
+ * @return {boolean}
+ */
+var isAnagram = function (s, t) {
+  const sLen = s.length;
+  const tLen = t.length;
+  if (sLen !== tLen) return false;
+
+  const count = [];
+  const a = "a".charCodeAt(0);
+  for (let i = 0; i < sLen; i++) {
+    const sI = s.charCodeAt(i) - a;
+    if (sI >= 0 || sI <= 25) {
+      if (!count[sI]) {
+        count[sI] = 0;
+      }
+      count[sI] = count[sI] + 1;
+    }
+    const tI = t.charCodeAt(i) - a;
+    if (tI >= 0 || tI <= 25) {
+      if (!count[tI]) {
+        count[tI] = 0;
+      }
+      count[tI] = count[tI] - 1;
+    }
+  }
+  for (let i = 0; i < 26; i++) {
+    if (count[i]) return false;
+  }
+  return true;
+};
+```
+
+**Reference**
+
+1. Valid Anagram (https://leetcode.com/problems/valid-anagram/)
