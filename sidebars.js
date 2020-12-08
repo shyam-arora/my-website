@@ -22,7 +22,11 @@ module.exports = {
     {
       type: "category",
       label: "Coding Questions",
-      items: ["coding-questions/easy-set-1", "coding-questions/easy-set-2"],
+      items: [
+        "coding-questions/easy-set-1",
+        "coding-questions/easy-set-2",
+        "coding-questions/medium-set-1",
+      ],
     },
     {
       type: "category",
