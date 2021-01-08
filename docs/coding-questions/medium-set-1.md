@@ -368,3 +368,137 @@ var merge = function (intervals) {
 **Reference**
 
 1. Merge Intervals (https://leetcode.com/problems/merge-intervals/solution/)
+
+## Add Two Numbers [(Leetcode)](https://leetcode.com/problems/add-two-numbers/)
+
+You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order, and each of their nodes contains a single digit. Add the two numbers and return the sum as a linked list.
+
+You may assume the two numbers do not contain any leading zero, except the number 0 itself.
+
+**Example 1:**
+
+```
+Input: l1 = [2,4,3], l2 = [5,6,4]
+Output: [7,0,8]
+Explanation: 342 + 465 = 807
+```
+
+**Example 2**
+
+```
+Input: l1 = [0], l2 = [0]
+Output: [0]
+```
+
+**Example 3**
+
+```
+Input: l1 = [9,9,9,9,9,9,9], l2 = [9,9,9,9]
+Output: [8,9,9,9,0,0,0,1]
+```
+
+```javascript
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} l1
+ * @param {ListNode} l2
+ * @return {ListNode}
+ */
+var addTwoNumbers = function (l1, l2) {
+  let l3 = { next: null };
+  let current = l3;
+  let carry = 0;
+  while (l1 || l2) {
+    const sum = (l1 ? l1.val : 0) + (l2 ? l2.val : 0) + carry;
+    current.next = new ListNode(sum % 10);
+    if (sum > 9) {
+      carry = 1;
+    } else {
+      carry = 0;
+    }
+    if (l1) l1 = l1.next;
+    if (l2) l2 = l2.next;
+    current = current.next;
+  }
+  if (carry) {
+    current.next = new ListNode(1);
+  }
+  return l3.next;
+};
+```
+
+**Reference**
+
+1. Add Two Numbers (https://leetcode.com/problems/add-two-numbers/)
+
+## Longest Substring Without Repeating Characters [(Leetcode)](https://leetcode.com/problems/longest-substring-without-repeating-characters/)
+
+Given a string s, find the length of the longest substring without repeating characters.
+
+**Example 1:**
+
+```
+Input: s = "abcabcbb"
+Output: 3
+Explanation: The answer is "abc", with the length of 3.
+```
+
+**Example 2**
+
+```
+Input: s = "bbbbb"
+Output: 1
+Explanation: The answer is "b", with the length of 1.
+```
+
+**Example 3**
+
+```
+Input: s = "pwwkew"
+Output: 3
+Explanation: The answer is "wke", with the length of 3.
+Notice that the answer must be a substring, "pwke" is a subsequence and not a substring.
+```
+
+### Brute force
+
+```javascript
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var lengthOfLongestSubstring = function (s) {
+  const sLen = s.length;
+  let maxLen = 0;
+  const isUnique = (i, j) => {
+    const set = new Set();
+    for (let k = i; k <= j; k++) {
+      if (set.has(s[k])) {
+        return false;
+      } else {
+        set.add(s[k]);
+      }
+    }
+    return true;
+  };
+
+  for (let i = 0; i < sLen; i++) {
+    for (let j = 0; j < sLen; j++) {
+      if (isUnique(i, j)) {
+        maxLen = Math.max(maxLen, j - i + 1);
+      }
+    }
+  }
+  return maxLen;
+};
+```
+
+**Reference**
+
+1. Longest Substring Without Repeating Characters (https://leetcode.com/problems/longest-substring-without-repeating-characters/)
